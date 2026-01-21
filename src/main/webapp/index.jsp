@@ -9,7 +9,8 @@
       font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f9;
+      background: linear-gradient(135deg, #6e7dff, #6573e0);
+      color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -17,29 +18,30 @@
     }
 
     .container {
-      background-color: #ffffff;
-      padding: 30px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 40px 50px;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       text-align: center;
-      max-width: 600px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
       width: 100%;
+      max-width: 600px;
     }
 
     h1 {
-      font-size: 36px;
-      color: #333;
+      font-size: 40px;
       margin-bottom: 20px;
+      font-weight: 700;
+      color: #ffeb3b;
     }
 
     p {
-      font-size: 20px;
-      color: #555;
+      font-size: 18px;
       margin-bottom: 30px;
+      color: #eeeeee;
     }
 
     .btn {
-      background-color: #007bff;
+      background-color: #ff5722;
       color: #fff;
       font-size: 18px;
       padding: 15px 30px;
@@ -47,40 +49,41 @@
       border-radius: 8px;
       cursor: pointer;
       text-decoration: none;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease;
     }
 
     .btn:hover {
-      background-color: #0056b3;
+      background-color: #e64a19;
     }
 
     .footer {
-      margin-top: 30px;
+      margin-top: 40px;
       font-size: 16px;
-      color: #777;
+      color: #eeeeee;
     }
 
     .footer a {
-      color: #007bff;
+      color: #ffeb3b;
       text-decoration: none;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
     .footer a:hover {
-      color: #0056b3;
+      color: #ffc107;
     }
+
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1>Welcome to My CI/CD Project</h1>
-    <p>This project demonstrates a fully automated CI/CD pipeline using Jenkins, GitHub, and Docker. The goal is to streamline the process of integrating and deploying code changes.</p>
+    <h1>CI/CD Automated Pipeline</h1>
+    <p>Welcome to my CI/CD project, showcasing automated build, test, and deployment processes. This project demonstrates an efficient DevOps pipeline integrating Jenkins, Docker, and GitHub.</p>
 
     <a href="#" class="btn">Learn More</a>
 
     <div class="footer">
-      <p>Check out my <a href="https://github.com/yourusername" target="_blank">GitHub</a> for more projects.</p>
+      <p>Check out my GitHub: <a href="https://github.com/khobaibkhan117" target="_blank">https://github.com/khobaibkhan117</a></p>
     </div>
   </div>
 
