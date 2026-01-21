@@ -1,52 +1,56 @@
 pipeline {
     agent any
-    
     tools {
-        maven "Maven3"
+        maven "maven3"
     }
     stages {
-        stage('Clean workspace') {
+        stage('Clean WorkSpace') {
             steps {
                 cleanWs()
             }
         }
         stage('Git clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/Aseemakram19/java-maven-app.git'
+                git branch: 'main', url: 'https://github.com/khobaibkhan117/java-maven-app.git'
             }
         }
-        stage('maven war file build') {
+        stage('Maven war file ') {
             steps {
-               sh 'mvn clean package'
+                sh 'mvn clean package'
             }
         }
-        stage('Docker images/conatiner remove') {
-            steps {
+        stage('Docker Images/Containers removal') {
+            steps { 
                 script{
-                        sh '''docker stop javamavenapp_container
-                        docker rm javamavenapp_container
-                        docker rmi javamavenapp aseemakram19/javamavenapp:latest'''
-                }  
-            }
-        }
-        stage('Docker images - Push to dockerhub') {
-            steps {
-                script{
-                    withDockerRegistry(credentialsId: 'docker', toolname: 'docker'){
-                
-                        sh '''docker build -t javamavenapp .
-                        docker tag javamavenapp aseemakram19/javamavenapp:latest
-                        docker push  aseemakram19/javamavenapp:latest'''
-                      } 
+                    sh '''
+                    docker stop javamavenapp_container
+                    docker rm javamavenapp_container
+                    docker rmi khobaibtw/javamavenapp:latest
+                    docker rmi $(docker images -f "dangling=true" -q)
+                    '''
                 }
             }
         }
-        stage('docker container of app') {
-            steps {
-               sh 'docker run -d -p 9000:8080 --name javamavenapp_container -t aseemakram19/javamavenapp:latest'
+        stage('Docker Build and Push Image to Docker Hub') {
+            steps { 
+                script{
+                    withDockerRegistry(credentialsId: 'khobaibtw', toolname: 'docker') {
+                        // Build and push the new image
+                        sh '''
+                        docker build -t javamavenapp .
+                        docker tag javamavenapp khobaibtw/javamavenapp:latest
+                        docker push khobaibtw/javamavenapp:latest
+                        '''
+                    }
+                }
             }
         }
-        
+        stage('Docker Container of MavenApp') {
+            steps {
+                // Run the new container with mapped ports
+                sh 'docker run -d -p 9000:8080 --name javamavenapp_container -t khobaibtw/javamavenapp:latest'
+            }
+        }
     }
     post {
     always {
@@ -64,14 +68,13 @@ pipeline {
                     <p>Started by: ${buildUser}</p>
                     <p>Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
                 """,
-                to: 'mohdaseemakram19@gmail.com',
-                from: 'mohdaseemakram19@gmail.com',
-                replyTo: 'mohdaseemakram19@gmail.com',
+                to: 'khobaibtw@gmail.com',
+                from: 'khobaibtw@gmail.com',
+                replyTo: 'khobaibtw@gmail.com',
                 mimeType: 'text/html',
                 attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
             )
-           }
-       }
-
+        }
     }
+}
 }
